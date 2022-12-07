@@ -13,8 +13,12 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import * as directives from '@/directives'
 
 Vue.use(ElementUI)
+Object.keys(directives).forEach(key => {
+  Vue.directive(key, directives[key])
+})
 
 Vue.config.productionTip = false
 
