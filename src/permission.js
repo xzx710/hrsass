@@ -1,7 +1,7 @@
 // 权限拦截 导航守卫 路由守卫  router
 import router from '@/router' // 引入路由实例
 import store from '@/store' // 引入vuex store实例
-import NProgress from 'nprogress' // 引入一份进度条插件
+import NProgress from 'nprogress' // 引入进度条插件
 import 'nprogress/nprogress.css' // 引入进度条样式
 
 const whiteList = ['/login', '/404'] // 定义白名单  所有不受权限控制的页面
@@ -13,7 +13,7 @@ router.beforeEach(async function(to, from, next) {
     //   如果有token 继续判断是不是去登录页
     if (to.path === '/login') {
       //  表示去的是登录页
-      next('/') // 跳到主页
+      next(from.path) // 跳到原来页
     } else {
       if (!store.getters.userId) {
         // 如果没有id这个值 才会调用 vuex的获取资料的action

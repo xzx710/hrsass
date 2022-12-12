@@ -3,7 +3,8 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "lib": ["DOM","ES5"]
   },
   "exclude": ["node_modules", "dist"],
   "vueCompilerOptions": {
