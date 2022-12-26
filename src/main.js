@@ -1,3 +1,11 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2022-12-26 13:41:43
+ * @Description:
+ * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
+ */
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
@@ -14,6 +22,14 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 import * as directives from '@/directives'
+import Component from '@/components'
+import * as filters from '@/filters' // 引入工具类
+// 注册全局的过滤器
+Object.keys(filters).forEach(key => {
+  // 注册过滤器
+  Vue.filter(key, filters[key])
+})
+Vue.use(Component) // 注册自己的插件
 
 Vue.use(ElementUI)
 Object.keys(directives).forEach(key => {

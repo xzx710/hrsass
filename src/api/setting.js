@@ -51,7 +51,7 @@ import request from '@/utils/request'
 /**
  * 获取角色列表
  * @param {PageOptions} params
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<RoleList>>}
+ * @returns {Promise<import('./user').ResponseData<RoleList>>}
  */
 export function getRoleList(params) {
   return request({
@@ -63,7 +63,7 @@ export function getRoleList(params) {
 /**
  * 获取公司信息
  * @param {String} companyId - 企业id
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Company>>}
+ * @returns {Promise<import('./user').ResponseData<Company>>}
  */
 export function getCompanyInfo(companyId) {
   return request({
@@ -74,7 +74,7 @@ export function getCompanyInfo(companyId) {
 /**
  * 删除角色
  * @param {Number} id
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Company>>}
+ * @returns {Promise<import('./user').ResponseData<Company>>}
  */
 export function deleteRole(id) {
   return request({
@@ -86,7 +86,7 @@ export function deleteRole(id) {
 /**
  * 修改角色
  * @param {Company} data
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Company>>}
+ * @returns {Promise<import('./user').ResponseData<Company>>}
  */
 export function updateRole(data) {
   return request({
@@ -99,7 +99,7 @@ export function updateRole(data) {
 /**
  * 获取角色详情
  * @param {String} id
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Company>>}
+ * @returns {Promise<import('./user').ResponseData<Company>>}
  */
 export function getRoleDetail(id) {
   return request({
@@ -110,7 +110,7 @@ export function getRoleDetail(id) {
 /**
  * 新增角色
  * @param {Company} data
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Company>>}
+ * @returns {Promise<import('./user').ResponseData<Company>>}
  */
 export function addRole(data) {
   return request({

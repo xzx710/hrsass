@@ -1,3 +1,11 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2022-12-26 13:39:08
+ * @Description:
+ * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
+ */
 // 引入axios实例对象
 import request from '@/utils/request'
 
@@ -22,7 +30,7 @@ import request from '@/utils/request'
  * @property {String} companyName - 公司名称
  * @property {String} companyManage - 公司负责人
  * @property {Department} depts- 公司负责人
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<DepartmentslistData>>}
+ * @returns {Promise<import('./user').ResponseData<DepartmentslistData>>}
  */
 export function getDepartments() {
   return request({
@@ -33,7 +41,7 @@ export function getDepartments() {
 /**
  * 删除部门
  * @param {String} id - 要被删除部门的id
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Null>>}
+ * @returns {Promise<import('./user').ResponseData<Null>>}
  */
 export function delDepartments(id) {
   return request({
@@ -45,7 +53,7 @@ export function delDepartments(id) {
 /**
  * 新增部门
  * @param {Department} data
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Department>>}
+ * @returns {Promise<import('./user').ResponseData<Department>>}
  */
 export function addDepartments(data) {
   return request({
@@ -58,7 +66,7 @@ export function addDepartments(data) {
 /**
  * 根据id获取部门详情
  * @param {String} id - 部门id
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Department>>}
+ * @returns {Promise<import('./user').ResponseData<Department>>}
  */
 export function getDepartDetail(id) {
   return request({
@@ -69,7 +77,7 @@ export function getDepartDetail(id) {
 /**
  * 更新部门
  * @param {Department} data
- * @returns {import('axios').AxiosPromise<import('./user').ResponseData<Any>>}
+ * @returns {Promise<import('./user').ResponseData<Any>>}
  */
 export function updateDepartments(data) {
   return request({

@@ -21,7 +21,7 @@ import request from '@/utils/request'
 /**
  * 用户登录
  * @param {LoginData} data - 登录数据
- * @returns {import('axios').AxiosPromise<ResponseData<String>>}
+ * @returns {Promise<ResponseData<String>>}
  */
 export function login(data) {
   return request({
@@ -44,7 +44,7 @@ export function login(data) {
  * @property {String[]} menus - 用户菜单列表
  * @property {String[]} points
  * @property {Null} authCacheKey
- * @returns {import('axios').AxiosPromise<ResponseData<UserInfo>>}
+ * @returns {Promise<ResponseData<UserInfo>>}
  */
 export function getUserInfo() {
   return request({
@@ -76,7 +76,7 @@ export function getUserInfo() {
  * @property {String[]} roleIds
  * @property {String} staffPhoto - 用户头像地址
  * @param {String} id - 要获取详细信息的用户id
- * @returns {import('axios').AxiosPromise<ResponseData<UserDetail>>}
+ * @returns {Promise<ResponseData<UserDetail>>}
  */
 export function getUserDetailById(id) {
   return request({
