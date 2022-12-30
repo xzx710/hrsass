@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2022-12-26 13:41:43
+ * @LastEditTime: 2022-12-30 14:56:48
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
  */
@@ -24,6 +24,9 @@ import '@/permission' // permission control
 import * as directives from '@/directives'
 import Component from '@/components'
 import * as filters from '@/filters' // 引入工具类
+import Print from 'vue-print-nb' // 引入打印插件
+
+Vue.use(Print)
 // 注册全局的过滤器
 Object.keys(filters).forEach(key => {
   // 注册过滤器
