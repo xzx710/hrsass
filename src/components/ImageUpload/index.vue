@@ -27,9 +27,7 @@
 
 <script>
 import COS from 'cos-js-sdk-v5' // 引入腾讯云cos包
-// 实例化COS对象
 const cos = new COS({
-  // 同学们拷贝自己的秘钥和key 只有用自己的key和自己的秘钥才能上传到自己的存储桶里面
   SecretId: 'AKIDPedMo1xc080buwiCPK0QZR3OSFk0zg6H', // 身份识别 ID
   SecretKey: 'wbz7yYrtjJcdPt62j8G7h15sHQItDH5c' // 身份密钥
 })
@@ -60,21 +58,13 @@ export default {
     // file是要删除的文件
     // fileList是删过之后的文件
     handleRemove(file, fileList) {
-    //   console.log(file)
-    //   console.log(fileList)
-    //   console.log(this.fileList)
       this.fileList = this.fileList.filter(item => item.uid !== file.uid) // 将当前的删除文件排除在外
     //   this.fileList = fileList
     },
     // 不能用push 这个钩子会执行多次
     changeFile(file, fileList) {
-      // file是当前的文件 fileList是当前的最新数组 this.fileList
-    //   console.log(file)
       // 如果当前fileList中没有该文件的话 就往里进行追加
       this.fileList = fileList.map(item => item)
-      // 这里为何暂时不成功呢  ？ 因为现在还没有上传 所有第二次进来的数据 一定是个空的
-    // 如果完成上传动作了 第一次进入 和第二次进去的fileList的长度应该都是1 应该都有数据
-    // 上传成功 =》 数据才能进来 =》腾讯云cos
     },
     beforeUpload(file) {
       //   先检查文件类型
@@ -108,13 +98,10 @@ export default {
           Body: params.file, // 要上传的文件对象
           StorageClass: 'STANDARD', // 上传的模式类型 直接默认 标准模式即可
           onProgress: (params) => {
-            // console.log(params)
             this.percent = params.percent * 100
           }
           // 上传到腾讯云 =》 哪个存储桶 哪个地域的存储桶 文件  格式  名称 回调
         }, (err, data) => {
-          // data返回数据之后 应该如何处理
-        //   console.log(err || data)
           // data中有一个statusCode === 200 的时候说明上传成功
           if (!err && data.statusCode === 200) {
             //   此时说明文件上传成功  要获取成功的返回地址
