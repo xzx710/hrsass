@@ -1,7 +1,23 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2022-12-30 14:43:28
+ * @Description:
+ * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
+ */
 export const imageerror = {
   inserted(dom, options) {
+    //   图片异常的逻辑
+    //  监听img标签的错误事件  因为图片加载失败 会触发  onerror事件
+    dom.src = dom.src || options.value
+
     dom.onerror = function() {
-      dom.src = options.value // 这里不能写死
+      // 图片失败  赋值一个默认的图片
+      dom.src = options.value
     }
+  },
+  componentUpdated(dom, options) {
+    dom.src = dom.src || options.value
   }
 }

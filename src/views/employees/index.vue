@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2022-12-30 12:58:56
+ * @LastEditTime: 2022-12-30 14:47:57
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
 -->
@@ -10,10 +10,10 @@
   <div class="dashboard-container">
     <div class="app-container">
       <page-tools :show-before="true">
-        <span slot="before">共166条记录</span>
+        <span slot="before">共{{ page.total }}条记录</span>
         <template slot="after">
           <el-button type="warning" size="small" @click="$router.push('/import?type=user')">导入</el-button>
-          <el-button size="small" type="danger" @click="exportData"> excel导出</el-button>
+          <el-button size="small" type="danger" @click="exportData">导出</el-button>
           <el-button icon="plus" type="primary" size="small" @click="showDialog = true">新增员工</el-button>
         </template>
       </page-tools>
@@ -22,21 +22,34 @@
         <el-table border :data="list">
           <el-table-column label="序号" sortable="" type="index" />
           <el-table-column label="姓名" sortable="" prop="username" />
+          <el-table-column width="120px" label="头像" align="center">
+            <!-- 插槽 -->
+            <!-- <template slot-scope="{ row }"> -->
+            <template v-slot="{ row }">
+              <img
+                v-imageerror="require('@/assets/common/head.jpg')"
+                :src="row.staffPhoto"
+                alt=""
+                style="border-radius: 50%; width: 100px; height: 100px; padding: 10px"
+                @click="showQrCode(row.staffPhoto)"
+              >
+            </template>
+          </el-table-column>
           <el-table-column label="工号" sortable="" prop="workNumber" />
           <el-table-column label="聘用形式" sortable :formatter="formatEmployment" />
           <el-table-column label="部门" sortable="" prop="departmentName" />
           <el-table-column label="入职时间" sortable="" align="center">
-            <template slot-scope="{ row }">{{ row.timeOfEntry | formatDate }}</template>
+            <template v-slot="{ row }">{{ row.timeOfEntry | formatDate }}</template>
           </el-table-column>
           <el-table-column label="账户状态" align="center" sortable="" prop="enableState">
-            <template slot-scope="{ row }">
+            <template v-slot="{ row }">
               <!-- 根据当前状态来确定 是否打开开关 -->
               <el-switch :value="row.enableState === 1" />
             </template>
           </el-table-column>
           <el-table-column label="操作" sortable="" fixed="right" width="280">
-            <template slot-scope="{ row }">
-              <el-button type="text" size="small">查看</el-button>
+            <template v-slot="{ row }">
+              <el-button type="text" size="small" @click="$router.push(`/employees/detail/${row.id}`)">查看</el-button>
               <el-button type="text" size="small">转正</el-button>
               <el-button type="text" size="small">调岗</el-button>
               <el-button type="text" size="small">离职</el-button>
@@ -57,11 +70,17 @@
         </el-row>
       </el-card>
     </div>
+    <el-dialog title="二维码" :visible.sync="showCodeDialog">
+      <el-row type="flex" justify="center">
+        <canvas ref="myCanvas" />
+      </el-row>
+    </el-dialog>
     <add-employee :show-dialog.sync="showDialog" />
   </div>
 </template>
 
 <script>
+import QrCode from 'qrcode'
 import { formatDate } from '@/filters'
 import AddEmployee from './components/add-employee'
 import EmployeeEnum from '@/api/constant/employees'
@@ -77,7 +96,8 @@ export default {
         size: 10,
         total: 0 // 总数
       },
-      showDialog: false
+      showDialog: false,
+      showCodeDialog: false
     }
   },
   created() {
@@ -161,6 +181,20 @@ export default {
         })
         // ["132", '张三’， ‘’，‘’，‘’d]
       })
+    },
+    showQrCode(url) {
+      // url存在的情况下 才弹出层
+      if (url) {
+        this.showCodeDialog = true // 数据更新了 但是我的弹层会立刻出现吗 ？页面的渲染是异步的！！！！
+        // 有一个方法可以在上一次数据更新完毕，页面渲染完毕之后
+        this.$nextTick(() => {
+          // 此时可以确认已经有ref对象了
+          QrCode.toCanvas(this.$refs.myCanvas, url) // 将地址转化成二维码
+          // 如果转化的二维码后面信息 是一个地址的话 就会跳转到该地址 如果不是地址就会显示内容
+        })
+      } else {
+        this.$message.warning('该用户还未上传头像')
+      }
     }
   }
 }
