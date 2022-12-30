@@ -1,3 +1,11 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2022-12-30 12:36:09
+ * @Description:
+ * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 import approvalsRouter from './modules/approvals'
@@ -48,7 +56,15 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-
+  {
+    path: '/import',
+    component: Layout,
+    hidden: true, // 隐藏在左侧菜单中
+    children: [{
+      path: '', // 二级路由path什么都不写 表示二级默认路由
+      component: () => import('@/views/import')
+    }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

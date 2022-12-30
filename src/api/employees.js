@@ -1,3 +1,11 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2022-12-30 12:37:27
+ * @Description:
+ * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
+ */
 // 引入axios实例对象
 import request from '@/utils/request'
 
@@ -76,6 +84,19 @@ export function addEmployee(data) {
   return request({
     method: 'post',
     url: '/sys/user',
+    data
+  })
+}
+
+/** *
+ *  封装一个导入员工的接口
+ *
+ * ***/
+
+export function importEmployee(data) {
+  return request({
+    url: '/sys/user/batch',
+    method: 'post',
     data
   })
 }
