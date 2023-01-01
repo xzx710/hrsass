@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2023-01-01 14:23:38
  * @LastEditors: xiezexuan
- * @LastEditTime: 2023-01-01 15:19:47
+ * @LastEditTime: 2023-01-01 15:54:04
  * @Description: vuex的权限模块
  * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
  */
@@ -27,7 +27,6 @@ export default {
       const routes = []
       //   筛选出 动态路由中和menus中能够对上的路由
       menus.forEach(key => {
-        console.log(key)
         // asyncRoutes 找 有没有对象中的name属性等于 key的 如果找不到就没权限 如果找到了 要筛选出来
         routes.push(...asyncRoutes.filter(item => item.name === key))
       })
