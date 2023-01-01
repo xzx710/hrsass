@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2022-12-30 14:56:48
+ * @LastEditTime: 2023-01-01 17:17:39
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
  */
@@ -26,8 +26,16 @@ import Component from '@/components'
 import * as filters from '@/filters' // 引入工具类
 import Print from 'vue-print-nb' // 引入打印插件
 import CheckPermission from '@/mixin/checkPermission'
-Vue.mixin(CheckPermission) // 全局混入
+import i18n from '@/lang'
 
+Vue.use(ElementUI, {
+  // element本身支持i18n的处理
+  // 此时 i18n就会根据当前的locale属性去寻找对应的显示内容
+  i18n: (key, value) => i18n.t(key)
+  // 改变locale的值 就可以改变对应的当前语言
+})
+
+Vue.mixin(CheckPermission) // 全局混入
 Vue.use(Print)
 // 注册全局的过滤器
 Object.keys(filters).forEach(key => {
@@ -36,7 +44,6 @@ Object.keys(filters).forEach(key => {
 })
 Vue.use(Component) // 注册自己的插件
 
-Vue.use(ElementUI)
 Object.keys(directives).forEach(key => {
   Vue.directive(key, directives[key])
 })
@@ -47,5 +54,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

@@ -1,3 +1,11 @@
+<!--
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 17:32:09
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+-->
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
@@ -5,6 +13,7 @@
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
+        <tags-view />
       </div>
       <app-main />
     </div>

@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2023-01-01 16:02:09
+ * @LastEditTime: 2023-01-01 17:27:35
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
  */
@@ -50,7 +50,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: 'dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
