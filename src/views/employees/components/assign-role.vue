@@ -1,3 +1,11 @@
+<!--
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:58:11
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 13:54:37
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+-->
 <template>
   <el-dialog title="分配角色" :visible="showRoleDialog" @close="btnCancel">
     <!-- 多选框组  v-model双向绑定-->
@@ -51,7 +59,6 @@ export default {
       // rows是要循环的记录
       this.list = rows
     },
-    // 这个方法是什么时候调用？props传值是异步的 所以这里不能用this.userId
     // 这个方法是给父组件调用的
     async getUserDetailById(id) {
       const { roleIds } = await getUserDetailById(id) // 将用户所拥有的角色赋值给当前用户的对象

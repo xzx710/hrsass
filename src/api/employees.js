@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2022-12-30 13:18:54
+ * @LastEditTime: 2023-01-01 13:59:12
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
  */
@@ -161,5 +161,16 @@ export function updateJob(data) {
     url: `/employees/${data.userId}/jobs`,
     method: 'put',
     data
+  })
+}
+
+/** *
+ * 给用户分配角色
+ * ***/
+export function assignRoles(data) {
+  return request({
+    url: '/sys/user/assignRoles',
+    data,
+    method: 'put'
   })
 }

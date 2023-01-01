@@ -1,3 +1,11 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 14:15:15
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+ */
 // 引入axios实例对象
 import request from '@/utils/request'
 
@@ -120,3 +128,11 @@ export function addRole(data) {
   })
 }
 
+// 给角色分配权限
+export function assignPerm(data) {
+  return request({
+    url: '/sys/role/assignPrem',
+    method: 'put',
+    data
+  })
+}

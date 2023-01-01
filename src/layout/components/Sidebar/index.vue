@@ -1,3 +1,11 @@
+<!--
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 15:25:56
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+-->
 <template>
   <div :class="{'has-logo':showLogo}">
     <logo v-if="showLogo" :collapse="isCollapse" />
@@ -28,11 +36,8 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar', 'routes'
     ]),
-    routes() {
-      return this.$router.options.routes
-    },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route

@@ -1,3 +1,11 @@
+<!--
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 14:05:43
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+-->
 <template>
   <div v-loading="loading" class="dashboard-container">
     <div class="app-container">
@@ -46,7 +54,7 @@ export default {
       this.loading = true
       const result = await getDepartments()
       this.company = { name: result.companyName, manager: '负责人', id: '' }
-      this.departs = tranListToTreeData(result.depts)
+      this.departs = tranListToTreeData(result.depts, '')
       this.loading = false
     },
     addDepts(node) {

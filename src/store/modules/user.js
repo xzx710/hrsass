@@ -1,5 +1,14 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 14:59:49
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+ */
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { login, getUserInfo, getUserDetailById } from '@/api/user'
+import { resetRouter } from '@/router'
 
 const state = {
   token: getToken(),
@@ -48,6 +57,10 @@ const actions = {
     context.commit('removeToken') // 不仅仅删除了vuex中的 还删除了缓存中的
     // 删除用户资料
     context.commit('removeUserInfo') // 删除用户信息
+    // 重置路由
+    resetRouter()
+    // 调用permission模块清除动态路由
+    context.commit('permission/setRouters', [], { root: true })
   }
 }
 

@@ -1,3 +1,11 @@
+/*
+ * @Author: xiezexuan
+ * @Date: 2022-12-26 13:31:10
+ * @LastEditors: xiezexuan
+ * @LastEditTime: 2023-01-01 15:12:08
+ * @Description:
+ * Copyright (c) 2023 by xiezexuan, All Rights Reserved.
+ */
 // 导出一个axios的实例  而且这个实例要有请求拦截器 响应拦截器
 import axios from 'axios'
 import { Message } from 'element-ui'
@@ -9,7 +17,7 @@ const TimeOut = 3600
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000
+  timeout: 50000
 }) // 创建一个axios的实例
 
 // 请求拦截器

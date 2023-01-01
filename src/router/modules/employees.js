@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2022-12-30 14:55:18
+ * @LastEditTime: 2023-01-01 15:27:51
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
  */
@@ -10,10 +10,11 @@ import Layout from '@/layout'
 export default {
   path: '/employees',
   component: Layout,
+  name: 'employees',
   children: [
     {
       path: '',
-      name: 'Employees',
+      name: 'employees',
       component: () => import('@/views/employees/index'),
       meta: { title: '员工', icon: 'people' }
     },

@@ -116,56 +116,72 @@ export function param2Obj(url) {
   return obj
 }
 
-/**
- * 将扁平化部门数组转化成树形部门数组
- * @typedef {Object} OldDepartment - 扁平化部门
- * @property {String} id - 部门id
- * @property {String} pid - 父部门id
- * @property {String} companyId - 公司id
- * @property {String} name - 部门名称
- * @property {String|Null} code - 公司id
- * @property {String|Null} managerId - 负责人id
- * @property {String|Null} manager - 负责人名字
- * @property {String|Null} introduce - 部门介绍
- * @property {Null} createTime - 部门创建时间
- * @typedef {Object} NewDepartment - 树形部门
- * @property {String} id - 部门id
- * @property {String} pid - 父部门id
- * @property {String} companyId - 公司id
- * @property {String} name - 部门名称
- * @property {String|Null} code - 公司id
- * @property {String|Null} managerId - 负责人id
- * @property {String|Null} manager - 负责人名字
- * @property {String|Null} introduce - 部门介绍
- * @property {Null} createTime - 部门创建时间
- * @property {Array<NewDepartment>} children - 子部门
- * @param {Array<OldDepartment>} departmentslist - 扁平化部门数据
- * @returns {Array<NewDepartment>}
- */
-export function tranListToTreeData(departmentslist) {
-  const departmentsMap = new Map()
-  const treeDepartmentsArray = []
+// /**
+//  * 将扁平化部门数组转化成树形部门数组
+//  * @typedef {Object} OldDepartment - 扁平化部门
+//  * @property {String} id - 部门id
+//  * @property {String} pid - 父部门id
+//  * @property {String} companyId - 公司id
+//  * @property {String} name - 部门名称
+//  * @property {String|Null} code - 公司id
+//  * @property {String|Null} managerId - 负责人id
+//  * @property {String|Null} manager - 负责人名字
+//  * @property {String|Null} introduce - 部门介绍
+//  * @property {Null} createTime - 部门创建时间
+//  * @typedef {Object} NewDepartment - 树形部门
+//  * @property {String} id - 部门id
+//  * @property {String} pid - 父部门id
+//  * @property {String} companyId - 公司id
+//  * @property {String} name - 部门名称
+//  * @property {String|Null} code - 公司id
+//  * @property {String|Null} managerId - 负责人id
+//  * @property {String|Null} manager - 负责人名字
+//  * @property {String|Null} introduce - 部门介绍
+//  * @property {Null} createTime - 部门创建时间
+//  * @property {Array<NewDepartment>} children - 子部门
+//  * @param {Array<OldDepartment>} departmentslist - 扁平化部门数据
+//  * @returns {Array<NewDepartment>}
+//  */
+// export function tranListToTreeData(departmentslist) {
+//   const departmentsMap = new Map()
+//   const treeDepartmentsArray = []
 
-  departmentslist.forEach(department => {
-    const id = department.id // 获取当前部门id
-    const pid = department.pid // 获取父部门id
-    // 判断当前部门是否已在map中
-    if (!departmentsMap[id]) {
-      departmentsMap[id] = { children: [] }
-    }
+//   departmentslist.forEach(department => {
+//     const id = department.id // 获取当前部门id
+//     const pid = department.pid // 获取父部门id
+//     // 判断当前部门是否已在map中
+//     if (!departmentsMap[id]) {
+//       departmentsMap[id] = { children: [] }
+//     }
 
-    const departmentTreeItem = departmentsMap[id] = { ...department, children: departmentsMap[id]['children'] }
+//     const departmentTreeItem = departmentsMap[id] = { ...department, children: departmentsMap[id]['children'] }
 
-    // 判断是否是根级部门
-    if (pid === '-1' || pid === '') {
-      treeDepartmentsArray.push(departmentTreeItem)
-    } else {
-      // 判断父部门是否在map中
-      if (!departmentsMap[pid]) {
-        departmentsMap[pid] = { children: [] }
+//     // 判断是否是根级部门
+//     if (pid === '-1' || pid === '') {
+//       treeDepartmentsArray.push(departmentTreeItem)
+//     } else {
+//       // 判断父部门是否在map中
+//       if (!departmentsMap[pid]) {
+//         departmentsMap[pid] = { children: [] }
+//       }
+//       departmentsMap[pid].children.push(departmentTreeItem)
+//     }
+//   })
+//   return treeDepartmentsArray
+// }
+
+export function tranListToTreeData(list, rootValue) {
+  var arr = []
+  list.forEach(item => {
+    if (item.pid === rootValue) {
+      // 找到之后 就要去找 item 下面有没有子节点
+      const children = tranListToTreeData(list, item.id)
+      if (children.length) {
+        // 如果children的长度大于0 说明找到了子节点
+        item.children = children
       }
-      departmentsMap[pid].children.push(departmentTreeItem)
+      arr.push(item) // 将内容加入到数组中
     }
   })
-  return treeDepartmentsArray
+  return arr
 }

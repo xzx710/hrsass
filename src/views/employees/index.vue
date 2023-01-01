@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2022-12-30 14:47:57
+ * @LastEditTime: 2023-01-01 15:38:07
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
 -->
@@ -12,7 +12,7 @@
       <page-tools :show-before="true">
         <span slot="before">共{{ page.total }}条记录</span>
         <template slot="after">
-          <el-button type="warning" size="small" @click="$router.push('/import?type=user')">导入</el-button>
+          <el-button v-if="checkPermission('employee_import')" type="warning" size="small" @click="$router.push('/import?type=user')">导入</el-button>
           <el-button size="small" type="danger" @click="exportData">导出</el-button>
           <el-button icon="plus" type="primary" size="small" @click="showDialog = true">新增员工</el-button>
         </template>
@@ -53,7 +53,7 @@
               <el-button type="text" size="small">转正</el-button>
               <el-button type="text" size="small">调岗</el-button>
               <el-button type="text" size="small">离职</el-button>
-              <el-button type="text" size="small">角色</el-button>
+              <el-button type="text" size="small" @click="editRole(row.id)">角色</el-button>
               <el-button type="text" size="small" @click="deleteEmployee(row.id)">删除</el-button>
             </template>
           </el-table-column>
@@ -76,6 +76,7 @@
       </el-row>
     </el-dialog>
     <add-employee :show-dialog.sync="showDialog" />
+    <assign-role ref="assignRole" :show-role-dialog.sync="showRoleDialog" :user-id="userId" />
   </div>
 </template>
 
@@ -84,9 +85,10 @@ import QrCode from 'qrcode'
 import { formatDate } from '@/filters'
 import AddEmployee from './components/add-employee'
 import EmployeeEnum from '@/api/constant/employees'
+import AssignRole from './components/assign-role.vue'
 import { getEmployeeList, delEmployee } from '@/api/employees'
 export default {
-  components: { AddEmployee },
+  components: { AddEmployee, AssignRole },
   data() {
     return {
       loading: false,
@@ -97,7 +99,9 @@ export default {
         total: 0 // 总数
       },
       showDialog: false,
-      showCodeDialog: false
+      showRoleDialog: false,
+      showCodeDialog: false,
+      userId: ''
     }
   },
   created() {
@@ -195,6 +199,12 @@ export default {
       } else {
         this.$message.warning('该用户还未上传头像')
       }
+    },
+    // 编辑角色
+    async  editRole(id) {
+      this.userId = id // props传值 是异步的
+      await this.$refs.assignRole.getUserDetailById(id) // 父组件调用子组件方法
+      this.showRoleDialog = true
     }
   }
 }

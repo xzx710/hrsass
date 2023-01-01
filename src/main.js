@@ -25,6 +25,8 @@ import * as directives from '@/directives'
 import Component from '@/components'
 import * as filters from '@/filters' // 引入工具类
 import Print from 'vue-print-nb' // 引入打印插件
+import CheckPermission from '@/mixin/checkPermission'
+Vue.mixin(CheckPermission) // 全局混入
 
 Vue.use(Print)
 // 注册全局的过滤器
