@@ -2,7 +2,7 @@
  * @Author: xiezexuan
  * @Date: 2022-12-26 13:31:10
  * @LastEditors: xiezexuan
- * @LastEditTime: 2023-01-01 15:01:13
+ * @LastEditTime: 2023-01-01 16:02:09
  * @Description:
  * Copyright (c) 2022 by xiezexuan, All Rights Reserved.
  */
@@ -16,6 +16,7 @@ import attendancesRouter from './modules/attendances'
 import salarysRouter from './modules/salarys'
 import settingRouter from './modules/setting'
 import socialRouter from './modules/social'
+import userRouter from './modules/user'
 
 Vue.use(Router)
 
@@ -62,7 +63,8 @@ export const constantRoutes = [
       path: '', // 二级路由path什么都不写 表示二级默认路由
       component: () => import('@/views/import')
     }]
-  }
+  },
+  userRouter
 ]
 
 const createRouter = () => new Router({
